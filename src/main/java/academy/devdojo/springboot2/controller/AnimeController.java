@@ -4,7 +4,6 @@ import academy.devdojo.springboot2.domain.Anime;
 import academy.devdojo.springboot2.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,5 +24,11 @@ public class AnimeController {
     public List<Anime> list(){
         log.info(dateUtil.formartLocalDateTimeToDataBaseStyle(LocalDateTime.now()));
         return List.of(new Anime("Attack on titan"), new Anime("Naruto"));
+    }
+
+    @GetMapping(path = "list2")
+    public List<Anime> list2(){
+        log.info(dateUtil.formartLocalDateTimeToDataBaseStyle(LocalDateTime.now()));
+        return List.of(new Anime("Attack on titan"), new Anime("Naruto"), new Anime("One piece"));
     }
 }
