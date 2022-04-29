@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -35,6 +36,13 @@ public class AnimeService {
 
         return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
+//    @Transactional(rollbackOn = Exception.class)
+//    public Anime save(AnimePostRequestBody animePostRequestBody) throws Exception{
+//        Anime save = animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
+//        if(true)
+//            throw new Exception(("bad code"));
+//        return save;
+//    }
 
     public void delete(long id) {
         animeRepository.delete(findByIdOrThrowBadRequestException(id));
