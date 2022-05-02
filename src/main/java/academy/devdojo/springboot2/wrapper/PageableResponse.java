@@ -1,4 +1,5 @@
 package academy.devdojo.springboot2.wrapper;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,15 +20,16 @@ public class PageableResponse<T> extends PageImpl<T> {
     private int numberOfElements;
 
     @JsonCreator(mode = Mode.PROPERTIES )
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public PageableResponse(@JsonProperty("content") List<T> content,
-                            @JsonProperty("number") int number,
-                            @JsonProperty("size") int size,
-                            @JsonProperty("totalElements") int totalElements,
-                            @JsonProperty("last") boolean last,
-                            @JsonProperty("first") boolean first,
-                            @JsonProperty("totalPages") int totalPages,
-                            @JsonProperty("numberOfElements") int numberOfElements) {
+        @JsonProperty("number") int number,
+        @JsonProperty("size") int size,
+        @JsonProperty("totalElements") int totalElements,
+        @JsonProperty("last") boolean last,
+        @JsonProperty("first") boolean first,
+        @JsonProperty("totalPages") int totalPages,
+        @JsonProperty("numberOfElements") int numberOfElements,
+        @JsonProperty("pageable") JsonNode pageable,
+        @JsonProperty("sort") JsonNode sort) {
         super(content, PageRequest.of(number, size), totalElements);
 
         this.last = last;
