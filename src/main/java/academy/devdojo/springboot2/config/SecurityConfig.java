@@ -20,6 +20,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DevDojoUserDetailsService devDojoUserDetailsService;
+
     /**
      * BasicAuthenticationFilter
      * UsernamePasswordAuthenticationFilter
@@ -27,9 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * DefaultLogoutPageGeneratingFilter
      * FilterSecurityInterceptor
      * Authetication -> Authorization
+     *
      * @param http
      * @throws Exception
      */
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -37,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/animes/admin/**").hasRole("ADMIN")
                 .antMatchers("/animes/**").hasRole("USER")
+                .antMatchers("/actuator/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -52,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("israel2")
                 .password(passwordEncoder.encode("pontes"))
-                .roles("USER","ADMIN")
+                .roles("USER", "ADMIN")
                 .and()
                 .withUser("devdojo2")
                 .password(passwordEncoder.encode("academy"))
